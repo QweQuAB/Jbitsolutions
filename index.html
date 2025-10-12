@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JB IT Solutions — Interactive Price Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#4a77d1; 
+      --accent-2:#8b78f2;
+      --muted:#5f677a; 
+      --card:#ffffff;
+      --bg-start:#edf3ff;
+      --bg-end:#e0ecff; 
+      --max-w:1100px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(135deg,var(--bg-start),var(--bg-end));color:#0f172a; line-height: 1.5; position: relative; z-index: 1;}
+    
+    /* --- BACKGROUND PATTERN --- */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      opacity: 0.03;
+      background-repeat: no-repeat;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%234a77d1' stroke-width='4'%3E%3Crect x='20' y='20' width='160' height='160' rx='8'/%3E%3Crect x='80' y='80' width='40' height='40'/%3E%3Cline x1='40' y1='30' x2='40' y2='170'/%3E%3Cline x1='60' y1='30' x2='60' y2='170'/%3E%3Cline x1='140' y1='30' x2='140' y2='170'/%3E%3Cline x1='160' y1='30' x2='160' y2='170'/%3E%3Crect x='70' y='30' width='60' height='20'/%3E%3Crect x='30' y='140' width='30' height='20'/%3E%3C/g%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%238b78f2' stroke-width='4'%3E%3Crect x='30' y='30' width='140' height='140' rx='8'/%3E%3Crect x='50' y='50' width='100' height='100'/%3E%3Ccircle cx='100' cy='100' r='30' fill='%238b78f2' stroke='none'/%3E%3C/g%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%234a77d1' stroke-width='4'%3E%3Crect x='10' y='70' width='180' height='60' rx='8'/%3E%3Ccircle cx='60' cy='100' r='20'/%3E%3Ccircle cx='140' cy='100' r='20'/%3E%3Crect x='150' y='50' width='40' height='20'/%3E%3C/g%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%238b78f2' stroke-width='4'%3E%3Cpath d='M10 80 H 190 V 120 H 10 Z'/%3E%3Crect x='30' y='90' width='20' height='20' fill='%238b78f2' stroke='none'/%3E%3Crect x='60' y='90' width='20' height='20' fill='%238b78f2' stroke='none'/%3E%3Crect x='90' y='90' width='20' height='20' fill='%238b78f2' stroke='none'/%3E%3Crect x='120' y='90' width='20' height='20' fill='%238b78f2' stroke='none'/%3E%3Crect x='150' y='90' width='20' height='20' fill='%238b78f2' stroke='none'/%3E%3C/g%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%234a77d1' stroke-width='4'%3E%3Crect x='50' y='50' width='100' height='100'/%3E%3Cline x1='50' y1='60' x2='20' y2='60'/%3E%3Cline x1='50' y1='80' x2='20' y2='80'/%3E%3Cline x1='50' y1='100' x2='20' y2='100'/%3E%3Cline x1='50' y1='120' x2='20' y2='120'/%3E%3Cline x1='50' y1='140' x2='20' y2='140'/%3E%3Cline x1='150' y1='60' x2='180' y2='60'/%3E%3Cline x1='150' y1='80' x2='180' y2='80'/%3E%3Cline x1='150' y1='100' x2='180' y2='100'/%3E%3Cline x1='150' y1='120' x2='180' y2='120'/%3E%3Cline x1='150' y1='140' x2='180' y2='140'/%3E%3C/g%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%238b78f2' stroke-width='4'%3E%3Crect x='25' y='40' width='150' height='120' rx='8'/%3E%3Cline x1='35' y1='60' x2='165' y2='60'/%3E%3Cline x1='35' y1='80' x2='165' y2='80'/%3E%3Cline x1='35' y1='100' x2='165' y2='100'/%3E%3Cline x1='35' y1='120' x2='165' y2='120'/%3E%3Cline x1='35' y1='140' x2='165' y2='140'/%3E%3Ccircle cx='45' cy='150' r='3' fill='%238b78f2' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+      background-position: 10% 20%, 80% 5%, 95% 85%, 25% 95%, 50% 50%, 5% 60%;
+      background-size: 240px, 160px, 240px, 180px, 200px, 160px;
+    }
+
+    .wrap{max-width:var(--max-w);margin:28px auto;padding:22px;background:rgba(255,255,255,0.9);border-radius:14px;box-shadow:0 10px 40px rgba(12,23,46,0.08)}
+    header{display:flex;align-items:center;gap:16px; flex-wrap: wrap;}
+    .logo{width:64px;height:64px;border-radius:12px; object-fit: cover; background-color: var(--accent);}
+    h1{margin:0;font-size:20px;color:var(--accent-2)}
+    p.sub{margin:2px 0 0;color:var(--muted);font-size:13px}
+    .controls{margin-left:auto;display:flex;gap:8px; align-items: center; flex-wrap: wrap;}
+    .btn{border:0;padding:8px 12px;border-radius:10px;cursor:pointer;background:#fff;box-shadow:0 6px 18px rgba(10,20,40,0.06);font-weight:700; display: flex; align-items: center; justify-content: center; gap: 6px;}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px}
+    .card{background:var(--card);border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(12,23,46,0.05);}
+    .section{margin-bottom:12px}
+    .service-row{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:8px}
+    .service-row:nth-child(odd){background:linear-gradient(180deg, rgba(235,238,255,0.8), rgba(250,250,255,0.8))}
+    .service-name{font-weight:700}
+    .price{font-weight:800;color:var(--accent); text-align: right; white-space: nowrap;}
+    .small{font-size:13px;color:var(--muted)}
+    input,select,textarea{padding:8px;border-radius:8px;border:1px solid #e6e9f5;width:100%}
+    label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+    .est-row, .booking-row {display:flex;gap:8px}
+    .est-row > *, .booking-row > * {flex:1}
+    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+
+    .tabs { display: flex; gap: 4px; border-bottom: 1px solid #dbe2ef; margin-bottom: 12px; flex-wrap: wrap;}
+    .tab-link { padding: 10px 16px; border: 0; background: transparent; cursor: pointer; font-weight: 600; color: var(--muted); border-bottom: 2px solid transparent; transition: color 0.3s, border-bottom-color 0.3s; }
+    .tab-link.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .tab-link:hover:not(.active) { color: #333; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.5s; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    
+    @media(max-width: 980px){
+      .grid{grid-template-columns:1fr}
+      header {flex-direction: column; align-items: flex-start; gap: 20px;}
+      .controls {margin-left: 0; width: 100%; justify-content: flex-start;}
+    }
+    @media (max-width: 768px) {
+      .wrap {padding: 15px; margin: 15px;}
+      .service-row {flex-direction: column; align-items: flex-start; gap: 5px;}
+      .price {text-align: left; background: #f7faff; padding: 4px 8px; border-radius: 6px; margin-top: 5px;}
+      .search-filter-bar {flex-direction: column; align-items: stretch; gap: 10px !important;}
+      .search-filter-bar > div:first-child {flex-direction: column;}
+      .search-filter-bar input, .search-filter-bar select {width: 100%;}
+    }
+    @media (max-width: 480px) {
+      body {font-size: 15px;}
+      h1 {font-size: 18px;}
+      .controls {flex-direction: column; align-items: stretch; gap: 10px;}
+      .controls .btn {width: 100%; text-align: center;}
+      .est-row, .booking-row {flex-direction: column;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="app">
+    <header>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <img src="images/logo1.png" alt="Company Logo" class="logo" id="logo">
+        <div>
+          <h1>JB IT SOLUTIONS</h1>
+          <p class="sub" id="subtitle-contact">Phone: 055 414 1150 • Email: juanbonal26@gmail.com</p>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="btn primary" id="printBtn">Print / Save PDF</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div>
+        <div class="tabs">
+          <button class="tab-link active" data-tab="tab-services">Services</button>
+          <button class="tab-link" data-tab="tab-guides">Guides & Info</button>
+          <button class="tab-link" data-tab="tab-booking">Booking & Feedback</button>
+        </div>
+
+        <div id="tab-services" class="tab-content active">
+          <div class="search-filter-bar" style="display:flex;gap:10px;align-items:center;justify-content:space-between; margin-bottom:12px; flex-wrap: wrap;">
+            <div style="display:flex;gap:10px;align-items:center; flex-grow: 1;">
+              <input type="search" id="search" placeholder="Search services..." style="padding:10px;border-radius:8px;border:1px solid #e6e9f5;min-width: 200px;" />
+              <select id="filter" style="padding:10px;border-radius:8px;border:1px solid #e6e9f5">
+                <option value="all">All Sections</option><option value="software">Software & Data</option><option value="care">PC & Laptop Care</option><option value="network">Networking & Builds</option><option value="media">Home Media</option><option value="deals">Special Deals</option>
+              </select>
+            </div>
+            <div class="small">Prices are base ranges. Parts/complex jobs may add charges.</div>
+          </div>
+          <div class="card" id="priceListCard"><div id="servicesContainer"></div></div>
+        </div>
+        
+        <div id="tab-guides" class="tab-content">
+          <div class="card" id="article-placeholder">
+            <p style="padding: 20px; text-align: center; color: var(--muted);">Loading guides...</p>
+          </div>
+        </div>
+        
+        <div id="tab-booking" class="tab-content">
+          <div class="card section" id="contactCard">
+            <h3>Booking & Contact</h3>
+            <div style="display:grid;gap:10px">
+              <div><label>Your name</label><input id="uName" /></div>
+              <div><label>Phone / Contact</label><input id="uPhone" /></div>
+              <div><label>Service required</label><select id="uService"></select></div>
+              <div><label>Notes / Details</label><textarea id="uNotes" rows="3"></textarea></div>
+              <div class="booking-row">
+                <button class="btn primary" id="bookBtn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/></svg>
+                  Request via Email
+                </button>
+                <button class="btn" id="smsBtn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/></svg>
+                  Request via SMS
+                </button>
+              </div>
+              <div class="booking-row"><button class="btn" id="saveJson">Save Request</button></div>
+              <div id="bookResult" class="small" style="min-height: 20px;"></div>
+            </div>
+          </div>
+          
+          <div class="card section" id="feedbackCard" style="margin-top:18px;">
+            <h3>Feedback</h3>
+            <p class="small" style="margin-top:-5px; margin-bottom:12px;">Have a suggestion or comment? Let us know!</p>
+            <div><label for="feedbackName">Your Name (Optional)</label><input id="feedbackName" /></div>
+            <div style="margin-top:10px;"><label for="feedbackText">Feedback</label><textarea id="feedbackText" rows="4"></textarea></div>
+            <div style="margin-top:10px;">
+              <button class="btn primary" id="submitFeedbackBtn">Submit Feedback</button>
+            </div>
+            <div id="feedbackResult" class="small" style="min-height: 20px; margin-top: 8px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h3>Warranty</h3>
+        <div class="small" style="margin-bottom:8px">Service warranty: 7–14 days</div>
+        <div style="margin-bottom:12px">
+          <strong>Contact Details</strong>
+          <div class="small" id="sidebar-contact">
+            Phone: 055 414 1150<br>
+            Email: juanbonal26@gmail.com
+			<div style="margin-bottom:12px">
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div class="small">Prices effective as listed • Parts priced separately • Contact for official quotes</div>
+    </footer>
+  </div>
+
+  <script>
+    // --- CONFIGURATION: EDIT THESE VALUES ---
+    const yourEmail = 'juanbona26@gmail.com'; // ** IMPORTANT: Replace with your email address
+    const yourPhoneNumber = '+233554141150';     // ** IMPORTANT: Replace with your phone number (international format)
+    // --- END CONFIGURATION ---
+
+    const services = [
+      {id:'win_basic', section:'software', name:'Windows Installation (Basic)', note:'Fresh install, basic drivers', base:80},
+      {id:'win_full', section:'software', name:'Windows Installation (Complete + Updates)', note:'Includes drivers, updates & essential software', base:120},
+      {id:'linux', section:'software', name:'Linux / Chrome OS Installation', note:'Full OS install + basic setup', base:60},
+      {id:'android_tv', section:'software', name:'Android TV Setup', note:'Install apps, configure network', base:40},
+      {id:'malware', section:'software', name:'Virus / Malware Removal', note:'Deep scan, cleanup', base:50},
+      {id:'software_inst', section:'software', name:'Software Installation (per program)', note:'Typical user software', base:30},
+      {id:'data_backup', section:'software', name:'Data Backup', note:'Up to reasonable GB', base:50},
+      {id:'data_recovery', section:'software', name:'Data Recovery', note:'Depends on damage', base:80},
+      {id:'data_transfer', section:'software', name:'Data Transfer', note:'Move files between drives', base:40},
+      {id:'diagnostics', section:'care', name:'System Diagnostics', note:'Initial check (no repairs)', base:30},
+      {id:'cleaning', section:'care', name:'Internal Cleaning & Dust Removal', note:'Fans, vents cleaned', base:30},
+      {id:'thermal', section:'care', name:'Thermal Paste Reapplication', note:'CPU/GPU paste renew', base:40},
+      {id:'tune', section:'care', name:'System Tune-up / Optimization', note:'Performance tweaks', base:40},
+      {id:'hw_replace', section:'care', name:'Hardware Replacement (Labor)', note:'Parts extra', base:40},
+      {id:'screen', section:'care', name:'Laptop Screen Replacement (Labor)', note:'Screen cost separate', base:40},
+      {id:'keyboard', section:'care', name:'Keyboard Replacement (Labor)', note:'Keyboard cost separate', base:30},
+      {id:'custom_build', section:'network', name:'Custom PC Build & Setup', note:'Build, cable mgmt, setup', base:100},
+      {id:'home_net', section:'network', name:'Home Network Setup', note:'Router, WiFi configuration', base:40},
+      {id:'multi_net', section:'network', name:'Multi-Device Network Setup', note:'Whole-home / multiple rooms', base:80},
+      {id:'plex', section:'media', name:'Plex / Media Server Setup', note:'Local streaming & library', base:60},
+      {id:'jellyfin', section:'media', name:'Jellyfin / Other Media Setup', note:'Self-hosted media', base:60},
+      {id:'tech_hour', section:'media', name:'General Tech Support (per hour)', note:'Onsite or remote', base:50},
+      {id:'remote', section:'media', name:'Remote Tech Support', note:'Quick remote fixes', base:40},
+      {id:'refresh', section:'deals', name:'Complete PC Refresh Package', note:'Cleaning + thermal paste + Windows install + optimization', base:150},
+      {id:'new_setup', section:'deals', name:'New PC Setup Package', note:'Install drivers + essential software + network config', base:120}
+    ];
+    
+    document.getElementById('subtitle-contact').textContent = `Phone: 055 414 1150 • Email: ${yourEmail}`;
+    document.getElementById('sidebar-contact').innerHTML = `Phone: 055 414 1150<br>Email: ${yourEmail}`;
+    
+    const tabs = document.querySelectorAll('.tab-link');
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = document.getElementById(tab.dataset.tab);
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            tabContents.forEach(tc => tc.classList.remove('active'));
+            target.classList.add('active');
+        });
+    });
+
+    const servicesContainer = document.getElementById('servicesContainer');
+    function renderServices(list){
+      servicesContainer.innerHTML='';
+      list.forEach(s=>{
+        const row = document.createElement('div'); row.className='service-row'; row.dataset.section = s.section; row.dataset.name = s.name;
+        row.innerHTML = `<div style="display:flex;flex-direction:column"><div class="service-name">${s.name}</div><div class="small">${s.note}</div></div><div class="price" data-base="${s.base}">₵${s.base} – ₵${Math.round(s.base*1.25)}</div>`;
+        servicesContainer.appendChild(row);
+      });
+    }
+    renderServices(services);
+
+    const uService = document.getElementById('uService');
+    services.forEach(s=>{
+      const opt = document.createElement('option'); opt.value=s.id; opt.textContent=s.name;
+      uService.appendChild(opt);
+    });
+
+    const search = document.getElementById('search');
+    const filter = document.getElementById('filter');
+    search.addEventListener('input', applyFilters);
+    filter.addEventListener('change', applyFilters);
+    function applyFilters(){
+      const q = search.value.trim().toLowerCase(); const f = filter.value;
+      document.querySelectorAll('.service-row').forEach(r=>{
+        const name = r.dataset.name.toLowerCase(); const section = r.dataset.section;
+        const matchesQ = !q || name.includes(q); const matchesF = f==='all' || section===f;
+        r.style.display = (matchesQ && matchesF) ? 'flex' : 'none';
+      });
+    }
+
+    function getBookingDetails() {
+      const name = document.getElementById('uName').value.trim();
+      const phone = document.getElementById('uPhone').value.trim();
+      const serviceId = document.getElementById('uService').value;
+      const notes = document.getElementById('uNotes').value.trim();
+      if(!name || !phone){ document.getElementById('bookResult').textContent = 'Please enter your name and contact.'; return null; }
+      const svc = services.find(s=>s.id===serviceId);
+      return { name, phone, service: svc.name, notes };
+    }
+
+    document.getElementById('bookBtn').addEventListener('click', ()=>{
+      const details = getBookingDetails(); if (!details) return;
+      const subject = encodeURIComponent('Booking Request: ' + details.service);
+      const body = encodeURIComponent(`Name: ${details.name}\nPhone: ${details.phone}\nService: ${details.service}\nNotes: ${details.notes}`);
+      window.location.href = `mailto:${yourEmail}?subject=${subject}&body=${body}`;
+      document.getElementById('bookResult').textContent = 'Booking draft opened in your mail client.';
+    });
+
+    document.getElementById('smsBtn').addEventListener('click', ()=>{
+      const details = getBookingDetails(); if (!details) return;
+      const body = encodeURIComponent(`Booking Request:\nService: ${details.service}\nName: ${details.name}\nContact: ${details.phone}\nNotes: ${details.notes}`);
+      window.location.href = `sms:${yourPhoneNumber}?body=${body}`;
+      document.getElementById('bookResult').textContent = 'Booking draft opened in your messaging app.';
+    });
+
+    document.getElementById('saveJson').addEventListener('click', ()=>{
+      const payload = { name: document.getElementById('uName').value.trim(), phone: document.getElementById('uPhone').value.trim(), service: document.getElementById('uService').value, notes: document.getElementById('uNotes').value.trim(), created: new Date().toISOString()};
+      const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'}); const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href=url; a.download = 'jb-booking-request.json'; document.body.appendChild(a); a.click(); a.remove();
+      document.getElementById('bookResult').textContent = 'Request saved locally as JSON.';
+    });
+    
+    document.getElementById('submitFeedbackBtn').addEventListener('click', () => {
+        const name = document.getElementById('feedbackName').value.trim();
+        const feedback = document.getElementById('feedbackText').value.trim();
+        const resultEl = document.getElementById('feedbackResult');
+        if (!feedback) {
+            resultEl.textContent = 'Please enter your feedback before submitting.';
+            return;
+        }
+        const subject = encodeURIComponent('Feedback from ' + (name || 'Anonymous User'));
+        const body = encodeURIComponent(feedback);
+        window.location.href = `mailto:${yourEmail}?subject=${subject}&body=${body}`;
+        resultEl.textContent = 'Feedback draft opened in your mail client. Thank you!';
+    });
+
+    document.getElementById('printBtn').addEventListener('click', ()=>window.print());
+
+    document.querySelectorAll('.btn').forEach(b=>b.tabIndex=0);
+  </script>
+
+  <script>
+    // Fetches the article content and places it on the page
+    fetch('article.html')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text();
+      })
+      .then(html => {
+        document.getElementById('article-placeholder').innerHTML = html;
+      })
+      .catch(error => {
+        console.error('Error loading the article:', error);
+        document.getElementById('article-placeholder').innerHTML = '<p style="padding: 20px; text-align: center; color: #d9534f;">Sorry, the article could not be loaded. Make sure the article.html file is in the same folder as this file.</p>';
+      });
+  </script>
+</body>
+</html>
