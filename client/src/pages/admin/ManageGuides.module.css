@@ -1,0 +1,128 @@
+.formPanel {
+  background: var(--surface);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.formTitle { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 18px; }
+
+.formFields { display: flex; flex-direction: column; gap: 14px; margin-bottom: 18px; }
+
+.row2 { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; }
+
+.field { display: flex; flex-direction: column; gap: 7px; }
+
+.label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-family: var(--mono);
+}
+
+.input {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 12px;
+  color: var(--text);
+  font-size: 13.5px;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+.input:focus { border-color: rgba(0, 212, 255, 0.4); }
+.input::placeholder { color: var(--text3); }
+
+.textarea { resize: vertical; min-height: 160px; font-family: var(--mono); font-size: 12.5px; }
+
+.checkRow { display: flex; align-items: center; gap: 8px; }
+
+.formActions { display: flex; gap: 10px; }
+
+.list { display: flex; flex-direction: column; gap: 10px; }
+
+.guideCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  transition: border-color 0.2s;
+}
+
+.guideCard:hover { border-color: var(--border2); }
+
+.guideHeader { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+
+.guideInfo { display: flex; flex-direction: column; gap: 4px; }
+
+.guideCat {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.guideTitle { font-size: 15px; font-weight: 700; color: var(--text); }
+.guideMeta { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+
+.guideActions { display: flex; align-items: center; gap: 8px; }
+
+.badgeActive {
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(6, 255, 165, 0.08);
+  color: var(--accent3);
+  border: 1px solid rgba(6, 255, 165, 0.2);
+}
+
+.badgeInactive {
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(255, 71, 87, 0.08);
+  color: var(--danger);
+  border: 1px solid rgba(255, 71, 87, 0.2);
+}
+
+.editBtn, .delBtn {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.editBtn { background: var(--bg2); color: var(--text2); }
+.editBtn:hover { border-color: var(--accent); color: var(--accent); }
+
+.delBtn { background: var(--bg2); color: var(--text3); }
+.delBtn:hover { border-color: var(--danger); color: var(--danger); background: rgba(255, 71, 87, 0.06); }
+
+.loading { display: flex; flex-direction: column; gap: 10px; }
+
+.skeleton {
+  height: 80px;
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.empty { text-align: center; color: var(--text3); padding: 60px 20px; font-size: 14px; }

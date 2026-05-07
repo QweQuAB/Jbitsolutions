@@ -1,0 +1,130 @@
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.bookingList { display: flex; flex-direction: column; }
+
+.bookingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+.bookingRow:last-child { border-bottom: none; }
+.bookingRow:hover { background: var(--bg3); }
+
+.bookingInfo { display: flex; flex-direction: column; gap: 2px; }
+.bookingName { font-size: 13.5px; font-weight: 600; color: var(--text); }
+.bookingService { font-size: 12px; color: var(--text2); }
+
+.statusBadge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-family: var(--mono);
+}
+
+.status_pending { background: rgba(255, 165, 2, 0.1); color: var(--warning); border: 1px solid rgba(255, 165, 2, 0.25); }
+.status_confirmed { background: rgba(0, 212, 255, 0.1); color: var(--accent); border: 1px solid rgba(0, 212, 255, 0.25); }
+.status_completed { background: rgba(6, 255, 165, 0.08); color: var(--accent3); border: 1px solid rgba(6, 255, 165, 0.25); }
+.status_cancelled { background: rgba(255, 71, 87, 0.08); color: var(--danger); border: 1px solid rgba(255, 71, 87, 0.25); }
+
+.pathList { display: flex; flex-direction: column; }
+
+.pathRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.pathRow:last-child { border-bottom: none; }
+
+.pathName { font-size: 12px; font-family: var(--mono); color: var(--text2); }
+.pathHits { font-size: 12px; font-family: var(--mono); color: var(--accent); font-weight: 700; }
+
+.statusGrid {
+  display: flex;
+  gap: 0;
+  padding: 20px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.statusItem { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+
+.statusCount {
+  font-size: 32px;
+  font-weight: 900;
+  font-family: var(--mono);
+}
+
+.statusLabel {
+  font-size: 11px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.skeleton {
+  height: 110px;
+  background: var(--surface);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.empty { padding: 40px; text-align: center; color: var(--text3); font-size: 14px; }
+
+@media (max-width: 900px) {
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+  .grid2 { grid-template-columns: 1fr; }
+}

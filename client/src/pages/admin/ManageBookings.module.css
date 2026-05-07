@@ -1,0 +1,98 @@
+.filterRow { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.filterBtn {
+  padding: 6px 14px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  transition: all 0.2s;
+}
+
+.filterBtn:hover { color: var(--text); border-color: var(--border2); }
+
+.filterActive {
+  background: rgba(124, 58, 237, 0.1) !important;
+  color: #a78bfa !important;
+  border-color: rgba(124, 58, 237, 0.3) !important;
+}
+
+.list { display: flex; flex-direction: column; gap: 12px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.2s;
+}
+
+.card:hover { border-color: var(--border2); }
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.customerInfo { display: flex; flex-direction: column; gap: 2px; }
+.customerName { font-size: 15px; font-weight: 700; color: var(--text); }
+.customerPhone { font-size: 12px; color: var(--text2); font-family: var(--mono); }
+
+.cardActions { display: flex; gap: 8px; align-items: center; }
+
+.statusSelect {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 6px 10px;
+  color: var(--text);
+  font-size: 12.5px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.delBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.delBtn:hover { border-color: var(--danger); color: var(--danger); background: rgba(255, 71, 87, 0.06); }
+
+.serviceName { font-size: 14px; font-weight: 600; color: var(--accent); }
+.notes { font-size: 13px; color: var(--text2); }
+.cardDate { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+
+.loading { display: flex; flex-direction: column; gap: 10px; }
+
+.skeleton {
+  height: 110px;
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.empty { text-align: center; color: var(--text3); padding: 60px 20px; font-size: 14px; }

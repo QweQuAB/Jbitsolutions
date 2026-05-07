@@ -1,0 +1,105 @@
+.logTable {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  font-family: var(--mono);
+}
+
+.tableHead {
+  display: grid;
+  grid-template-columns: 100px 70px 1fr 60px 80px 130px;
+  padding: 10px 16px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.logRow {
+  display: grid;
+  grid-template-columns: 100px 70px 1fr 60px 80px 130px;
+  padding: 9px 16px;
+  border-bottom: 1px solid rgba(30, 48, 80, 0.5);
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  transition: background 0.1s;
+}
+
+.logRow:last-child { border-bottom: none; }
+.logRow:hover { background: var(--bg3); }
+
+.cellTime { color: var(--text3); font-size: 11px; }
+.cellPath { color: var(--text2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cellMs { color: var(--accent3); font-weight: 700; }
+.cellIp { color: var(--text3); font-size: 11px; overflow: hidden; text-overflow: ellipsis; }
+
+.methodBadge {
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.get { background: rgba(6, 255, 165, 0.1); color: var(--accent3); }
+.post { background: rgba(0, 212, 255, 0.1); color: var(--accent); }
+.put { background: rgba(255, 165, 2, 0.1); color: var(--warning); }
+.delete { background: rgba(255, 71, 87, 0.1); color: var(--danger); }
+.patch { background: rgba(124, 58, 237, 0.1); color: #a78bfa; }
+
+.statusCode {
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.status2xx { background: rgba(6, 255, 165, 0.08); color: var(--accent3); }
+.status3xx { background: rgba(0, 212, 255, 0.08); color: var(--accent); }
+.status4xx { background: rgba(255, 165, 2, 0.1); color: var(--warning); }
+.status5xx { background: rgba(255, 71, 87, 0.1); color: var(--danger); }
+
+.skeleton {
+  height: 38px;
+  background: var(--bg2);
+  margin: 2px 0;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 60px 20px;
+  color: var(--text3);
+  font-size: 13px;
+  font-family: var(--font);
+}
+
+.emptyIcon { opacity: 0.3; }
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.pageInfo { font-size: 13px; color: var(--text2); font-family: var(--mono); }
+
+@media (max-width: 768px) {
+  .tableHead, .logRow { grid-template-columns: 80px 60px 1fr 55px; }
+  .cellMs, .cellIp { display: none; }
+}
