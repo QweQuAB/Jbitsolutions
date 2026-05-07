@@ -14,12 +14,12 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', requireAuth, async (req, res) => {
-  const { title, content, category } = req.body;
+  const { title, content, category, cover_image } = req.body;
   if (!title || !content) return res.status(400).json({ error: 'Missing required fields' });
   try {
     const result = await pool.query(
-      'INSERT INTO guides (title, content, category) VALUES ($1, $2, $3) RETURNING *',
-      [title, content, category || 'general']
+      'INSERT INTO guides (title, content, category, cover_image) VALUES ($1, $2, $3, $4) RETURNING *',
+      [title, content, category || 'general', cover_image || null]
     );
     res.status(201).json(result.rows[0]);
   } catch (e) {
@@ -28,12 +28,12 @@ router.post('/', requireAuth, async (req, res) => {
 });
 
 router.put('/:id', requireAuth, async (req, res) => {
-  const { title, content, category, active } = req.body;
+  const { title, content, category, active, cover_image } = req.body;
   const { id } = req.params;
   try {
     const result = await pool.query(
-      'UPDATE guides SET title=$1, content=$2, category=$3, active=$4, updated_at=NOW() WHERE id=$5 RETURNING *',
-      [title, content, category, active, id]
+      'UPDATE guides SET title=$1, content=$2, category=$3, active=$4, cover_image=$5, updated_at=NOW() WHERE id=$6 RETURNING *',
+      [title, content, category, active, cover_image || null, id]
     );
     if (result.rows.length === 0) return res.status(404).json({ error: 'Not found' });
     res.json(result.rows[0]);
