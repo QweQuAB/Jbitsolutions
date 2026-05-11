@@ -6,6 +6,7 @@ import {
   Clock, MapPin, Zap, ArrowRight, ChevronDown, X
 } from 'lucide-react';
 import { api } from '../../api';
+import { useTrackClick } from '../../hooks/useTracker';
 import styles from './BookingPage.module.css';
 
 const EMAIL = 'juanbonal26@gmail.com';
@@ -33,6 +34,7 @@ export default function BookingPage() {
   const [fbResult, setFbResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [fbLoading, setFbLoading] = useState(false);
+  const trackClick = useTrackClick();
 
   useEffect(() => {
     api.getServices().then(setServices).catch(() => {});
@@ -53,6 +55,7 @@ export default function BookingPage() {
     setLoading(true);
     try {
       await api.createBooking(form);
+      trackClick('Book a Service', `email:${form.service_name}`);
       const sub = encodeURIComponent(`Booking Request: ${form.service_name}`);
       const body = encodeURIComponent(`Hi JB IT Solutions,\n\nI'd like to book: ${form.service_name}\n\nName: ${form.customer_name}\nPhone: ${form.phone}\nNotes: ${form.notes || 'None'}`);
       window.location.href = `mailto:${EMAIL}?subject=${sub}&body=${body}`;
@@ -67,6 +70,7 @@ export default function BookingPage() {
     setLoading(true);
     try {
       await api.createBooking(form);
+      trackClick('Book a Service', `sms:${form.service_name}`);
       const body = encodeURIComponent(`Booking Request\nService: ${form.service_name}\nName: ${form.customer_name}\nPhone: ${form.phone}\nNotes: ${form.notes || 'None'}`);
       window.location.href = `sms:${PHONE}?body=${body}`;
       setBookResult({ type: 'success', msg: 'Booking saved! Opening SMS...' });
@@ -79,6 +83,7 @@ export default function BookingPage() {
     setLoading(true);
     try {
       await api.createBooking(form);
+      trackClick('Book a Service', `saved:${form.service_name}`);
       setBookResult({ type: 'success', msg: 'Your booking request has been saved. We\'ll be in touch shortly!' });
       setForm({ customer_name: '', phone: '', service_name: '', notes: '' });
     } catch (e) { setBookResult({ type: 'error', msg: e.message }); }

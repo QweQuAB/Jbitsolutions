@@ -44,6 +44,7 @@ export const api = {
 
   // Stats & Logs
   getStats: () => request('GET', '/stats'),
+  getAnalytics: () => request('GET', '/stats/analytics'),
   getLogs: (limit = 100, offset = 0) => request('GET', `/stats/logs?limit=${limit}&offset=${offset}`),
 
   // Guides
@@ -51,4 +52,13 @@ export const api = {
   createGuide: (data) => request('POST', '/guides', data),
   updateGuide: (id, data) => request('PUT', `/guides/${id}`, data),
   deleteGuide: (id) => request('DELETE', `/guides/${id}`),
+
+  // Interactions (fire-and-forget, no auth)
+  trackInteraction: (type, page, detail = null) => {
+    fetch(`${BASE}/stats/interaction`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type, page, detail }),
+    }).catch(() => {});
+  },
 };

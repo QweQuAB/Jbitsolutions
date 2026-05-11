@@ -6,6 +6,7 @@ import {
   ArrowRight, Calendar, CheckCircle, X, Zap, Clock, Award
 } from 'lucide-react';
 import { api } from '../../api';
+import { useTrackClick } from '../../hooks/useTracker';
 import styles from './ServicesPage.module.css';
 
 const SECTIONS = [
@@ -38,6 +39,7 @@ export default function ServicesPage() {
   const [section, setSection] = useState('all');
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState(null);
+  const trackClick = useTrackClick();
 
   useEffect(() => {
     api.getServices()
@@ -202,7 +204,7 @@ export default function ServicesPage() {
                       {group.items.map((s, i) => (
                         <ServiceCard key={s.id} service={s} index={i}
                           color={SECTION_COLORS[s.section]}
-                          onClick={() => setSelected(s)} />
+                          onClick={() => { setSelected(s); trackClick('Services', s.name); }} />
                       ))}
                     </div>
                   </div>
@@ -212,7 +214,7 @@ export default function ServicesPage() {
                   {filtered.map((s, i) => (
                     <ServiceCard key={s.id} service={s} index={i}
                       color={SECTION_COLORS[s.section]}
-                      onClick={() => setSelected(s)} />
+                      onClick={() => { setSelected(s); trackClick('Services', s.name); }} />
                   ))}
                 </div>
               )}

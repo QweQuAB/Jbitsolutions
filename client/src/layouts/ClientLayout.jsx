@@ -3,12 +3,14 @@ import { Outlet, NavLink, Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Monitor, BookOpen, Calendar, Menu, X, Sun, Moon, Zap, ArrowRight } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useTracker } from '../hooks/useTracker';
 import styles from './ClientLayout.module.css';
 
 export default function ClientLayout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { theme, toggle } = useTheme();
+  useTracker();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);

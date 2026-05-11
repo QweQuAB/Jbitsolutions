@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, Clock, ArrowLeft, ArrowRight, Tag, Image as ImageIcon } from 'lucide-react';
 import { api } from '../../api';
+import { useTrackClick } from '../../hooks/useTracker';
 import styles from './GuidesPage.module.css';
 
 const CATEGORY_STYLES = {
@@ -29,6 +30,7 @@ export default function GuidesPage() {
   const [guides, setGuides] = useState([]);
   const [active, setActive] = useState(null);
   const [loading, setLoading] = useState(true);
+  const trackClick = useTrackClick();
 
   useEffect(() => {
     api.getGuides()
@@ -87,7 +89,8 @@ export default function GuidesPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}>
             {guides.map((guide, i) => (
-              <GuideCard key={guide.id} guide={guide} index={i} onClick={() => setActive(guide)} />
+              <GuideCard key={guide.id} guide={guide} index={i}
+                onClick={() => { setActive(guide); trackClick('Guides', guide.title); }} />
             ))}
           </motion.div>
         )}

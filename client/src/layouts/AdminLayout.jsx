@@ -17,7 +17,7 @@ export default function AdminLayout() {
     { to: '/admin/bookings', label: 'Bookings', icon: <Calendar size={17} /> },
     { to: '/admin/feedback', label: 'Feedback', icon: <MessageSquare size={17} /> },
     { to: '/admin/guides', label: 'Guides', icon: <BookOpen size={17} /> },
-    { to: '/admin/logs', label: 'Traffic Logs', icon: <Activity size={17} /> },
+    { to: '/admin/logs', label: 'Analytics', icon: <Activity size={17} /> },
   ];
 
   function logout() {

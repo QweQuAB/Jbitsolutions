@@ -9,6 +9,7 @@ import bookingsRoutes from './routes/bookings.js';
 import feedbackRoutes from './routes/feedback.js';
 import statsRoutes from './routes/stats.js';
 import guidesRoutes from './routes/guides.js';
+import { runMigrations } from './migrate.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -34,6 +35,8 @@ app.use(express.static(clientDist));
 app.get('*', (req, res) => {
   res.sendFile(path.join(clientDist, 'index.html'));
 });
+
+runMigrations().catch(console.error);
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`JB IT Solutions API running on port ${PORT}`);
