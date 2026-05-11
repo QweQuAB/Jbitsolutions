@@ -1,6 +1,7 @@
 import express from 'express';
 import pool from '../db.js';
 import { requireAuth } from '../middleware/auth.js';
+import { sendBookingAlert } from '../email.js';
 
 const router = express.Router();
 
@@ -12,7 +13,12 @@ router.post('/', async (req, res) => {
       'INSERT INTO bookings (customer_name, phone, service_name, notes) VALUES ($1, $2, $3, $4) RETURNING *',
       [customer_name, phone, service_name, notes || '']
     );
-    res.status(201).json(result.rows[0]);
+    const booking = result.rows[0];
+
+    // Fire email notification in background — never blocks the response
+    sendBookingAlert(booking).catch(() => {});
+
+    res.status(201).json(booking);
   } catch (e) {
     res.status(500).json({ error: 'Server error' });
   }
