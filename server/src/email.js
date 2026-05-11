@@ -9,11 +9,27 @@ function getTransporter() {
   if (!GMAIL_PASS) return null;
   if (!transporter) {
     transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
       auth: { user: GMAIL_USER, pass: GMAIL_PASS },
     });
   }
   return transporter;
+}
+
+export async function verifyEmailConnection() {
+  const t = getTransporter();
+  if (!t) {
+    console.warn('[email] GMAIL_APP_PASSWORD not set — email notifications disabled');
+    return;
+  }
+  try {
+    await t.verify();
+    console.log(`[email] SMTP connection verified — alerts will be sent to ${GMAIL_USER}`);
+  } catch (err) {
+    console.error('[email] SMTP verification failed:', err.message);
+  }
 }
 
 export async function sendBookingAlert(booking) {

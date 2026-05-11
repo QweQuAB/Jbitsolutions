@@ -10,6 +10,7 @@ import feedbackRoutes from './routes/feedback.js';
 import statsRoutes from './routes/stats.js';
 import guidesRoutes from './routes/guides.js';
 import { runMigrations } from './migrate.js';
+import { verifyEmailConnection } from './email.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -37,6 +38,7 @@ app.get('*', (req, res) => {
 });
 
 runMigrations().catch(console.error);
+verifyEmailConnection();
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`JB IT Solutions API running on port ${PORT}`);
