@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 
 const GMAIL_USER = process.env.GMAIL_USER || 'juanbonal26@gmail.com';
-const GMAIL_PASS = process.env.GMAIL_APP_PASSWORD;
+const GMAIL_PASS = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '');
 
 let transporter = null;
 
