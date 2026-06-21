@@ -14,35 +14,35 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
 
-      - name: Use Node.js 18
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
+    - name: Use Node.js 18
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
 
-      - name: Install client dependencies
-        working-directory: client
-        run: npm ci
+    - name: Install client dependencies
+      working-directory: client
+      run: npm ci
 
-      - name: Build client
-        working-directory: client
-        run: npm run build
+    - name: Build client
+      working-directory: client
+      run: npm run build
 
-      - name: Debug: list client and dist contents
-        run: |
-          echo "Project root listing:"
-          ls -la
-          echo "client listing:"
-          ls -la client || true
-          echo "client/dist listing:"
-          ls -la client/dist || true
+    - name: Debug list client and dist contents
+      run: |
+        echo "Project root listing:"
+        ls -la
+        echo "client listing:"
+        ls -la client || true
+        echo "client/dist listing:"
+        ls -la client/dist || true
 
-      - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: client/dist
+    - name: Upload artifact for GitHub Pages
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: client/dist
 
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v1
