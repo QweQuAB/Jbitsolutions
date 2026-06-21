@@ -40,7 +40,7 @@ jobs:
         ls -la client/dist || true
 
     - name: Upload artifact for GitHub Pages
-      uses: actions/upload-pages-artifact@v1
+      uses: actions/upload-pages-artifact@v3
       with:
         path: client/dist
 
