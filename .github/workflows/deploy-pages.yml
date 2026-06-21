@@ -1,0 +1,20 @@
+  - name: Use Node.js 18
+    uses: actions/setup-node@v4
+    with:
+      node-version: 18
+
+  - name: Install client dependencies
+    working-directory: client
+    run: npm ci
+
+  - name: Build client
+    working-directory: client
+    run: npm run build
+
+  - name: Upload artifact for GitHub Pages
+    uses: actions/upload-pages-artifact@v1
+    with:
+      path: client/dist
+
+  - name: Deploy to GitHub Pages
+    uses: actions/deploy-pages@v1
