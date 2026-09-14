@@ -30,12 +30,8 @@ app.use('/api/guides', guidesRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok', time: new Date().toISOString() }));
 
-// Serve static frontend in production
-const clientDist = path.join(__dirname, '../../client/dist');
-app.use(express.static(clientDist));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(clientDist, 'index.html'));
-});
+// API health check
+app.get('/', (req, res) => res.json({ status: 'ok', service: 'JB IT Solutions API' }));
 
 runMigrations().catch(console.error);
 verifyEmailConnection();

@@ -1,4 +1,6 @@
-const BASE = '/api';
+const BASE = window.location.hostname === 'qwequab.github.io'
+  ? 'https://jbitsolutions.onrender.com/api'
+  : '/api';
 
 function getToken() {
   return localStorage.getItem('admin_token');
