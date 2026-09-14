@@ -20,7 +20,7 @@ function ProtectedRoute({ children }) {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Jbitsolutions">
       <Routes>
         <Route path="/" element={<ClientLayout />}>
           <Route index element={<ServicesPage />} />
