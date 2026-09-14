@@ -3,7 +3,7 @@ import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard, Wrench, Calendar, MessageSquare,
-  Activity, BookOpen, LogOut, Menu, X, Shield, ChevronRight
+  Activity, BookOpen, LogOut, Menu, X, Shield, ChevronRight, KeyRound
 } from 'lucide-react';
 import styles from './AdminLayout.module.css';
 
@@ -18,6 +18,7 @@ export default function AdminLayout() {
     { to: '/admin/feedback', label: 'Feedback', icon: <MessageSquare size={17} /> },
     { to: '/admin/guides', label: 'Guides', icon: <BookOpen size={17} /> },
     { to: '/admin/logs', label: 'Analytics', icon: <Activity size={17} /> },
+    { to: '/admin/change-password', label: 'Change Password', icon: <KeyRound size={17} /> },
   ];
 
   function logout() {

@@ -62,10 +62,10 @@ CREATE TABLE IF NOT EXISTS admin_users (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Default admin user (username: admin, password: admin123)
--- Change this password immediately after first login!
+-- Default admin user (username: admin, password: JBadmin2026!)
+-- Change this password immediately after first login via the admin panel!
 INSERT INTO admin_users (username, password_hash)
-VALUES ('admin', '$2a$10$1Yvg8zi8unlL/KwB1tLkG.Whevc9a2C6V91WMTA3OMdRfxpEloOUy')
+VALUES ('admin', '$2a$10$v6qZ9mzRP2j765QrP8jFluDNbEFQAWMSZZAbidmdpBz3IcETLwM8S')
 ON CONFLICT (username) DO NOTHING;
 
 -- Seed services

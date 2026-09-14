@@ -12,6 +12,7 @@ import ManageBookings from './pages/admin/ManageBookings';
 import ManageFeedback from './pages/admin/ManageFeedback';
 import TrafficLogs from './pages/admin/TrafficLogs';
 import ManageGuides from './pages/admin/ManageGuides';
+import ChangePassword from './pages/admin/ChangePassword';
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem('admin_token');
@@ -35,6 +36,7 @@ export default function App() {
           <Route path="feedback" element={<ManageFeedback />} />
           <Route path="logs" element={<TrafficLogs />} />
           <Route path="guides" element={<ManageGuides />} />
+          <Route path="change-password" element={<ChangePassword />} />
         </Route>
       </Routes>
     </BrowserRouter>
