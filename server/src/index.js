@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { Pool } from 'pg';
 import { trafficLogger } from './middleware/logger.js';
 import authRoutes from './routes/auth.js';
 import servicesRoutes from './routes/services.js';
@@ -17,6 +18,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use(trafficLogger);
@@ -29,6 +32,15 @@ app.use('/api/stats', statsRoutes);
 app.use('/api/guides', guidesRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok', time: new Date().toISOString() }));
+
+app.get('/api/db-ping', async (_req, res) => {
+  try {
+    await pool.query('SELECT 1');
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(500).json({ ok: false });
+  }
+});
 
 // API health check
 app.get('/', (req, res) => res.json({ status: 'ok', service: 'JB IT Solutions API' }));
